@@ -1,0 +1,76 @@
+openapi: '3.0.2'
+info:
+  title: AI Cockpit Decisions
+  version: '0.0.1'
+  description: |
+    This API is part of project AI cockpit. 
+
+    For more details see: TODO
+
+servers:
+  - url: https://api.server.test/v0
+
+paths:
+  /info:
+    get:
+      responses:
+        '200':
+          description: OK
+  /decisions:
+    get:
+      responses:
+        '200':
+          description: list all decisions in this system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Decision'
+
+components:
+  schemas:
+    Info:
+      type: object
+      properties:
+        generation-date:
+          type: string
+          format: date-time
+        systemDescription:
+          type: string
+        apiVersion:
+          type: string
+    Decision:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        uuid:
+          type: string
+          format: uuid
+          description: Globally unique ID
+        autonomyLevel:
+          $ref: '#/components/schemas/AutonomyLevel'
+        followingDecisions:
+          type: array
+          description: "Decisions that use output of this decisions. Can be null"
+          items:
+            $ref: '#/components/schemas/Decision'
+          example:
+            - id: 0
+              name: NextDecision
+              uuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+              autonomyLevel: autonomous
+            - id: 1
+              name: AnotherDecision
+              uuid: "3fa85f64-4417-4562-b3fc-2c963f66afa6"
+              autonomyLevel: proposalOnly
+    AutonomyLevel:
+      type: string 
+      enum:
+        - autonomous
+        - proposalOnly
+        - disabled
+
