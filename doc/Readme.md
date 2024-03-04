@@ -11,6 +11,10 @@ Thus a two-fold API is proposed to guarantee human control. This API aims at bei
 
 ## Definitions
 
+### Relation to EU's AI Act
+TODO
+
+
 __Decision API__
 
 * Definition decision
