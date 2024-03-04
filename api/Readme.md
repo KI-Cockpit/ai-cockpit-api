@@ -9,4 +9,4 @@ API defined here is using [OpenAPI](https://www.openapis.org/) and it follows th
 For a general introduction to OpenAPI see this [FOSDEM talk](https://fosdem.org/2024/schedule/event/fosdem-2024-2531-introduction-to-openapi/).
 
 ## Usage 
-TODO
+To test generated API you can use: https://editor-next.swagger.io/
