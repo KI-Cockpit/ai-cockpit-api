@@ -8,7 +8,7 @@ info:
     For more details see: TODO
 
 servers:
-  - url: https://api.server.test/v0
+  - url: http://localhost:8080/v0
 
 paths:
   /info:
@@ -18,6 +18,8 @@ paths:
           description: OK
   /decisions:
     get:
+      description: get all decisions in this system
+      operationId: getAllDecisions
       responses:
         '200':
           description: list all decisions in this system
@@ -73,4 +75,3 @@ components:
         - autonomous
         - proposalOnly
         - disabled
-
