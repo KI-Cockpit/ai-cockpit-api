@@ -1,0 +1,54 @@
+openapi: '3.0.2'
+info:
+  title: AI Cockpit Transparency
+  version: '0.0.1'
+  description: |
+    This API is part of project AI cockpit. 
+
+    For more details see: TODO
+
+servers:
+  - url: http://localhost:8080/v0
+
+paths:
+  /info:
+    get:
+      responses:
+        '200':
+          description: OK
+  /biastests:
+    get:
+      description: get all biastests for this system
+      operationId: getAllBiasTests
+      responses:
+        '200':
+          description: list all decisions in this system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BiasTest'
+
+components:
+  schemas:
+    Info:
+      type: object
+      properties:
+        generation-date:
+          type: string
+          format: date-time
+        systemDescription:
+          type: string
+        apiVersion:
+          type: string
+    BiasTest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name: 
+          type: string
+
+
