@@ -1,0 +1,429 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: KIC API
+  description: The KI Cockpit API
+paths:
+  /kpis:
+    get:
+      summary: Returns a list of Key Performance Indicators
+      description: Key Performance Indicators
+      tags: 
+        - KPIs
+      parameters:
+        - $ref: '#/components/parameters/filter'
+      responses:
+        '200':
+          description: list of kpis
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KPI'
+  /kpis/{kpiID}:
+    get:
+      summary: get KPI incl. timeseries by ID
+      tags:
+        - KPIs
+      parameters:
+        - name: kpiID
+          in: path
+          required: true
+          description: KPI ID
+          schema:
+            type : string
+        - name: startDatetime
+          in: header
+          required: true
+          schema:
+            type: string
+            format: date
+            description: Start Date
+            example: "2024-01-01"
+        - name: endDatetime
+          in: header
+          required: true
+          schema:
+            type: string
+            format: date
+            description: End Date
+            example: "2024-01-10"
+        - $ref: '#/components/parameters/filter'
+      responses:
+        '200':
+          description: get kpi incl. list of time points
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/KPI'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/KPItimepoint'
+  /tests:
+    get:
+      summary: get list of all tests
+      tags:
+        - Testcases
+      parameters:
+        - $ref: '#/components/parameters/filter'
+      responses:
+        '200':
+          description: list of all tests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Test"
+  /tests/{testID}:
+    get:
+      summary: get details of test
+      tags:
+        - Testcases
+      parameters:
+        - name: testID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: details of a test
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+  /tests/{testID}/executions/:
+    get:
+      summary: get test executions for a specific test
+      tags:
+        - Testcases
+      parameters:
+        - name: testID
+          in: path
+          required: true
+          schema:
+            type: string
+
+        - $ref: '#/components/parameters/filter'
+      responses:
+        '200':
+          description: list of test executions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Testexecution'
+    post:
+      summary: Create and start a new Test Execution for a Test
+      tags:
+        - Testcases
+      parameters:
+        - name: testID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+            description: name of test to start
+        - name: configdata
+          in: query
+          schema:
+            type: string
+            description: configuration data for test execution
+      responses:
+        '200':
+          description: test execution successfully started
+          content:
+            application/json:
+              schema:
+                type: string
+                description: ID of the new test exeuction
+  /tests/{testID}/executions/{executionID}:
+    get:
+      summary: get test executions details
+      tags:
+        - Testcases
+      parameters:
+        - name: testID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: executionID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: details of test execution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testexecution'
+  /rules:
+    get:
+      summary: list of all rules
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/filter'
+      responses:
+        '200':
+          description: list of all rules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rule'
+  /rules/{ruleID}:
+    get:
+      summary: get details of one rule
+      tags:
+        - Rules
+      parameters:
+        - name: ruleID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: details of a rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+    post:
+      summary: update rule
+      tags:
+        - Rules
+      parameters:
+        - name: ruleID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: active
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: details of a rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'                
+  /autonomylevels/:
+    get:
+      summary: list of all levels of autonomy
+      tags:
+        - Level of Autonomy
+      responses:
+        '200':
+          description: list of all levels of autonomy
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Level_of_Autonomy'                
+  /autonomylevels/{level_of_autonomy_ID}:
+    get:
+      summary: get details of level of autonomy
+      tags:
+        - Level of Autonomy
+      parameters:
+        - name: level_of_autonomy_ID
+          in: path
+          required: true
+          schema:
+            type: string
+            description: ID of level of autonomy
+      responses:
+        '200':
+          description: details of a level of autonomy 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Level_of_Autonomy'
+    post:
+      summary: set autonomy level to active
+      tags:
+        - Level of Autonomy
+      parameters:
+        - name: level_of_autonomy_ID
+          in: path
+          required: true
+          schema:
+            type: string
+            description: ID of level of autonomy
+        - name: active
+          in: header
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: set autonomy level successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                description: System Message of new Autonomy level
+components:
+  schemas:
+    KPI:
+      description: Key Performance Indicator with MinMax Alerting-Boundaries
+      properties:
+        id: 
+          type: string
+          description: id of kpi
+        name: 
+          type: string
+          description: name of kpi
+        description: 
+          type: string
+          description: description of kpi
+        max_value_alert: 
+          type: integer
+          description: alert if value is higher then this max value
+        min_value_alert: 
+          type: integer
+          description: alert if value is lower then this min value
+        alert_action: 
+          type: string
+          description: reference to defined system action
+        alert_description:
+          type: string
+          description: desribers what happens during the alerting action
+        alerting_active:
+          type: boolean
+          description: is min-max alerting active?
+    KPItimepoint:
+      description: Datapoint for every timepoint
+      properties:
+        timepoint:
+          type: string
+          description: date and time of kpi value 
+        value:
+          type: integer
+          description: single kpi value
+        comment:
+          type: string
+          description: comment of kpi timepoint
+    Level_of_Autonomy:
+      description: Autonomie-Level
+      properties:
+        id: 
+          type: string
+          description: id of autonomy level
+        name: 
+          type: string
+          description: name of autonomy level
+        description: 
+          type: string
+          description: description of autonomy level
+        active: 
+          type: boolean
+          description: active flag of autonomy level
+    Rule:
+      description: Automated Rule with Actions
+      properties:
+        id: 
+          type: string
+          description: id of rule
+        name: 
+          type: string
+          description: name of rule
+        description:
+          type: string
+          description: description of rule
+        script:
+          type: string
+          description: logical script of rule
+        check_intervall:
+          type: integer
+          description: time until next check in ms
+        last_check_datetime:
+          type: string
+          description: date & time of last check
+        last_check_status:
+          type: integer
+          description: status of last check
+        active:
+          type: boolean
+          description: active Flag
+        alert_action:
+          type: string
+          description: reference to triggered alerting action 
+    Test:
+      description: Test Case with Data and Config
+      properties:
+        id: 
+          type: string
+          description: id of testcase
+        name: 
+          type: string
+          description: name of testcase
+        description:
+          type: string
+          description: description of testcase
+        testdata: 
+          type: string
+          description: testing data for the test
+        testconfig:
+          type: string
+          description: config data for the test
+        last_execution_datetime:
+          type: string
+          description: date & time of last execution
+        next_execution_datetime:
+          type: string
+          description: date & time of next planned execution
+        last_status:
+          type: integer
+          description: success status of last execution
+    Testexecution:
+      properties:
+        id:
+          type: string
+          description: The ID of the test execution
+        name:
+          type: string
+          description: The name of the test execution
+        run_status:
+          type: string
+          enum: 
+          - not_run
+          - in_progress
+          - failure
+          - finnished
+          description: run status of the test
+        result_status:
+          type: string
+          enum: 
+          - empty
+          - pass
+          - fail
+          description: result status of the test execution (0) notstarted (1) success (2) error
+        status_message:
+          type: string
+          description: system status message of test execution
+        duration:
+          type: integer
+          description: duration of the testexecution in ms
+  parameters:
+    filter:
+      in:  query
+      name: filter
+      schema:
+        type: string
+
