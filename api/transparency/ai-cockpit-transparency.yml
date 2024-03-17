@@ -13,9 +13,17 @@ servers:
 paths:
   /info:
     get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
       responses:
         '200':
-          description: OK
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Info'
   /biastests:
     get:
       description: get all biastests for this system
@@ -29,6 +37,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/BiasTest'
+    post:
+        description: create a bias test
+        operationId: createBiasTest
+        requestBody:
+          description: Bias test to be created
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BiasTest'
+        responses:
+          '200':
+            description: create new bias test
+  /biastests/{id}:
+    put:
+        description: update a bias test
+        operationId: updateBiasTest
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: true
+            description: Numeric ID of bias test to be updated        
+        requestBody:
+          description: Bias test to be updated
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BiasTest'
+        responses:
+          '200':
+            description: update a bias test            
 
 components:
   schemas:
