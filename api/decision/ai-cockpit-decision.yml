@@ -13,9 +13,17 @@ servers:
 paths:
   /info:
     get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
       responses:
         '200':
-          description: OK
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Info'
   /decisions:
     get:
       description: get all decisions in this system
@@ -29,6 +37,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Decision'
+    post:
+        description: create a decisions config in this system
+        operationId: createDecision
+        requestBody:
+          description: Decision test to be created
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Decision'
+        responses:
+          '200':
+            description: create new decision
+  /decision/{id}:
+    put:
+        description: update a Decision
+        operationId: updateDecision
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: true
+            description: Numeric ID of decision to be updated        
+        requestBody:
+          description: Decision to be updated
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Decision'
+        responses:
+          '200':
+            description: update a decision 
 
 components:
   schemas:
