@@ -6,14 +6,17 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 stages:
-- generate-code
-- test-generated-code
+- generate-compile-code
 - test
 - verify
 
 variables:
   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
   REPO_BASE: $CI_BUILDS_DIR/ki-cockpit/ai-cockpit-api
+
+cache:
+  paths:
+    - .m2/repository
 
 sast:
   stage: test
@@ -26,7 +29,7 @@ include:
 # unit test result
 
 generate-api-code:
-  stage: generate-code
+  stage: generate-compile-code
   image: maven:latest
   cache:
     paths:
@@ -35,22 +38,17 @@ generate-api-code:
   script:
     - cd $REPO_BASE/api/decision/generators/java-client
     - mvn package
-    - cd $REPO_BASE/api/decision/generators/java-server
-    - mvn package
-    - cd $REPO_BASE/api/transparency/generators/java-client
-    - mvn package
-    - cd $REPO_BASE/api/transparency/generators/java-server
-    - mvn package
-
-test-generated-api-code:
-  stage: test-generated-code
-  image: maven:latest
-  script:
     - cd $REPO_BASE/api/decision/generators/java-client/target/generated-sources/openapi
     - mvn package
-    - cd $REPO_BASE/api/decision/generators/java-server/target/generated-sources/openapi
+    - cd $REPO_BASE/api/decision/generators/java-server
     - mvn package
+    - cd $REPO_BASE/api/decision/generators/java-server/target/generated-sources/openapi
+    - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-client
     - cd $REPO_BASE/api/transparency/generators/java-client/target/generated-sources/openapi
+    - mvn package    
+    - mvn package
+    - cd $REPO_BASE/api/transparency/generators/java-server
     - mvn package
     - cd $REPO_BASE/api/transparency/generators/java-server/target/generated-sources/openapi
     - mvn package
