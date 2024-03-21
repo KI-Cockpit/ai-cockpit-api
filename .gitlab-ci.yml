@@ -8,6 +8,7 @@
 stages:
 - generate-code
 - test-generated-code
+- test
 - verify
 
 variables:
