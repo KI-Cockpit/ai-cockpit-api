@@ -23,18 +23,12 @@ sast:
 include:
 - template: Security/SAST.gitlab-ci.yml
 
-# TODO
-# generate openAPI code
-# compile generated code
-# unit test result
-
-generate-api-code:
+# generate code and compile generated code
+generate-api-code_and_compile:
   stage: generate-compile-code
   image: maven:latest
-  cache:
-    paths:
-      - $REPO_BASE/api/decision/generators/
-      - $REPO_BASE/api/transparency/generators/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
   script:
     - cd $REPO_BASE/api/decision/generators/java-client
     - mvn package
@@ -45,10 +39,26 @@ generate-api-code:
     - cd $REPO_BASE/api/decision/generators/java-server/target/generated-sources/openapi
     - mvn package    
     - cd $REPO_BASE/api/transparency/generators/java-client
-    - cd $REPO_BASE/api/transparency/generators/java-client/target/generated-sources/openapi
     - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-client/target/generated-sources/openapi
     - mvn package
     - cd $REPO_BASE/api/transparency/generators/java-server
     - mvn package
     - cd $REPO_BASE/api/transparency/generators/java-server/target/generated-sources/openapi
+    - mvn package
+
+# just check if code generation works 
+generate-api-code:
+  stage: generate-compile-code
+  image: maven:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE != 'merge_request_event'
+  script:
+    - cd $REPO_BASE/api/decision/generators/java-client
+    - mvn package
+    - cd $REPO_BASE/api/decision/generators/java-server
+    - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-client
+    - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-server
     - mvn package
