@@ -28,6 +28,10 @@ include:
 generate-api-code:
   stage: generate-code
   image: maven:latest
+  cache:
+    paths:
+      - $REPO_BASE/api/decision/generators/
+      - $REPO_BASE/api/transparency/generators/
   script:
     - cd $REPO_BASE/api/decision/generators/java-client
     - mvn package
