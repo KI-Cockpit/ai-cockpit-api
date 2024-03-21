@@ -6,8 +6,45 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 stages:
-- test
+- generate-code
+- test-generated-code
+- verify
+
+variables:
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+
 sast:
   stage: test
 include:
 - template: Security/SAST.gitlab-ci.yml
+
+# TODO
+# generate openAPI code
+# compile generated code
+# unit test result
+
+generate-api-code:
+  stage: generate-code
+  image: maven:latest
+  script:
+    - cd $CI_BUILDS_DIR/api/decision/generators/java-client
+    - mvn package
+    - cd $CI_BUILDS_DIR/api/decision/generators/java-server
+    - mvn package
+    - cd $CI_BUILDS_DIR/api/transparency/generators/java-client
+    - mvn package
+    - cd $CI_BUILDS_DIR/api/transparency/generators/java-server
+    - mvn package
+
+test-generated-api-code:
+  stage: test-generate-code
+  image: maven:latest
+  script:
+    - cd $CI_BUILDS_DIR/api/decision/generators/java-client/target/generated-sources/openapi
+    - mvn package
+    - cd $CI_BUILDS_DIR/api/decision/generators/java-server/target/generated-sources/openapi
+    - mvn package
+    - cd $CI_BUILDS_DIR/api/transparency/generators/java-client/target/generated-sources/openapi
+    - mvn package
+    - cd $CI_BUILDS_DIR/api/transparency/generators/java-server/target/generated-sources/openapi
+    - mvn package
