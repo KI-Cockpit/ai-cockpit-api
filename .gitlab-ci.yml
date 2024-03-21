@@ -13,6 +13,7 @@ stages:
 
 variables:
   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+  REPO_BASE: $CI_BUILDS_DIR/ki-cockpit/ai-cockpit-api
 
 sast:
   stage: test
@@ -28,24 +29,24 @@ generate-api-code:
   stage: generate-code
   image: maven:latest
   script:
-    - cd $CI_BUILDS_DIR/api/decision/generators/java-client
+    - cd $REPO_BASE/api/decision/generators/java-client
     - mvn package
-    - cd $CI_BUILDS_DIR/api/decision/generators/java-server
+    - cd $REPO_BASE/api/decision/generators/java-server
     - mvn package
-    - cd $CI_BUILDS_DIR/api/transparency/generators/java-client
+    - cd $REPO_BASE/api/transparency/generators/java-client
     - mvn package
-    - cd $CI_BUILDS_DIR/api/transparency/generators/java-server
+    - cd $REPO_BASE/api/transparency/generators/java-server
     - mvn package
 
 test-generated-api-code:
   stage: test-generated-code
   image: maven:latest
   script:
-    - cd $CI_BUILDS_DIR/api/decision/generators/java-client/target/generated-sources/openapi
+    - cd $REPO_BASE/api/decision/generators/java-client/target/generated-sources/openapi
     - mvn package
-    - cd $CI_BUILDS_DIR/api/decision/generators/java-server/target/generated-sources/openapi
+    - cd $REPO_BASE/api/decision/generators/java-server/target/generated-sources/openapi
     - mvn package
-    - cd $CI_BUILDS_DIR/api/transparency/generators/java-client/target/generated-sources/openapi
+    - cd $REPO_BASE/api/transparency/generators/java-client/target/generated-sources/openapi
     - mvn package
-    - cd $CI_BUILDS_DIR/api/transparency/generators/java-server/target/generated-sources/openapi
+    - cd $REPO_BASE/api/transparency/generators/java-server/target/generated-sources/openapi
     - mvn package
