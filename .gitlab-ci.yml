@@ -6,8 +6,59 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 stages:
+- generate-compile-code
 - test
+- verify
+
+variables:
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+  REPO_BASE: $CI_BUILDS_DIR/ki-cockpit/ai-cockpit-api
+
+cache:
+  paths:
+    - .m2/repository
+
 sast:
   stage: test
 include:
 - template: Security/SAST.gitlab-ci.yml
+
+# generate code and compile generated code
+generate-api-code_and_compile:
+  stage: generate-compile-code
+  image: maven:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  script:
+    - cd $REPO_BASE/api/decision/generators/java-client
+    - mvn package
+    - cd $REPO_BASE/api/decision/generators/java-client/target/generated-sources/openapi
+    - mvn package
+    - cd $REPO_BASE/api/decision/generators/java-server
+    - mvn package
+    - cd $REPO_BASE/api/decision/generators/java-server/target/generated-sources/openapi
+    - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-client
+    - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-client/target/generated-sources/openapi
+    - mvn package
+    - cd $REPO_BASE/api/transparency/generators/java-server
+    - mvn package
+    - cd $REPO_BASE/api/transparency/generators/java-server/target/generated-sources/openapi
+    - mvn package
+
+# just check if code generation works 
+generate-api-code:
+  stage: generate-compile-code
+  image: maven:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE != 'merge_request_event'
+  script:
+    - cd $REPO_BASE/api/decision/generators/java-client
+    - mvn package
+    - cd $REPO_BASE/api/decision/generators/java-server
+    - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-client
+    - mvn package    
+    - cd $REPO_BASE/api/transparency/generators/java-server
+    - mvn package
