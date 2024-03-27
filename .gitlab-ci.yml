@@ -23,12 +23,30 @@ sast:
 include:
 - template: Security/SAST.gitlab-ci.yml
 
+generate-java-libs:
+  stage: generate-compile-code
+  image: maven:latest
+  script:
+    - cd $REPO_BASE/api/transparency/generators/java-lib
+    - ./generate.sh generate
+    - cd aicockpit-transparency-jar
+    - mvn package
+    - cd $REPO_BASE/api/decision/generators/java-lib
+    - ./generate.sh generate    
+    - cd aicockpit-decision-jar
+    - mvn package
+  artifacts:
+    paths:
+      - $REPO_BASE/api/transparency/generators/java-lib/aicockpit-transparency-jar/target/*.jar
+      - $REPO_BASE/api/decision/generators/java-lib/aicockpit-decision-jar/target/*.jar
+
+
 # generate code and compile generated code
 generate-api-code_and_compile:
   stage: generate-compile-code
   image: maven:latest
-  rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  only:
+    - merge_requests
   script:
     - cd $REPO_BASE/api/decision/generators/java-client
     - mvn package
