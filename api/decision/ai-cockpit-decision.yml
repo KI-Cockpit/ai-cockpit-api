@@ -51,6 +51,26 @@ paths:
           '200':
             description: create new decision
   /decision/{id}:
+    get:
+      description: get decisions by id 
+      operationId: getDecisionsById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of decision to load
+      responses:
+        '200':
+          description: returns decisions by id
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: 'datatypes.yaml#/components/schemas/Decision'
+        '404':
+          description: A decision with the specified ID was not found.
     put:
         description: update a Decision
         operationId: updateDecision
@@ -70,4 +90,6 @@ paths:
                 $ref: 'datatypes.yaml#/components/schemas/Decision'
         responses:
           '200':
-            description: update a decision 
+            description: update a decision
+          '404':
+            description: A decision with the specified ID was not found.
