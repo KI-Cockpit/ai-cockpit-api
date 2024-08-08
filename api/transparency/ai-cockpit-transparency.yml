@@ -36,7 +36,60 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/ModelType'        
+                    $ref: '#/components/schemas/ModelType'
+    post:
+        description: create a new module
+        operationId: createModule
+        requestBody:
+          description: Module test to be created
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        responses:
+          '200':
+            description: create new bias test
+  /modules/{id}:
+    get:
+      description: delivers components/modules with provided id
+      operationId: getModule
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of module        
+      responses:
+        '200':
+          description: get single module
+          content:
+              application/json:
+                schema:
+                  type: object
+                  items:
+                    $ref: '#/components/schemas/ModelType'
+    put:
+        description: update a module
+        operationId: updateModule
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: true
+            description: Numeric ID of module test to be updated        
+        requestBody:
+          description: Module test to be updated
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        responses:
+          '200':
+            description: update a module test  
   /biastests:
     get:
       description: get all biastests for this system
@@ -100,6 +153,9 @@ components:
     Module:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64      
         name:
           type: string
         description:
