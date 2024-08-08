@@ -36,7 +36,7 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/ModelType'
+                    $ref: '#/components/schemas/Module'
     post:
         description: create a new module
         operationId: createModule
@@ -69,7 +69,7 @@ paths:
                 schema:
                   type: object
                   items:
-                    $ref: '#/components/schemas/ModelType'
+                    $ref: '#/components/schemas/Module'
     put:
         description: update a module
         operationId: updateModule
