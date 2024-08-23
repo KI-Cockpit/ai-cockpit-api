@@ -1,0 +1,37 @@
+name: Generate code and build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "generate code from openapi definition"
+    runs-on: [linux, X64]
+
+    steps:
+        - name: checkout
+          uses: actions/checkout@v4
+
+        - name: Set up JDK 21
+          uses: actions/setup-java@v4
+          with:
+            distribution: 'temurin'
+            java-version: 21
+    
+        - name: Set up Maven
+          uses: stCarolas/setup-maven@v4.5
+          with:
+            maven-version: 3.9.2
+
+        - name: Generate and build with Maven
+          run: |
+            cd api/transparency/generators/java-lib
+            mvn clean -B package --file pom.xml
+            cd aicockpit-transparency-jar
+            mvn package
+            cd api/decision/generators/java-lib
+            mvn clean -B package --file pom.xml
+            cd aicockpit-decision-jar
+            mvn package
+          env:
+            CI: false
