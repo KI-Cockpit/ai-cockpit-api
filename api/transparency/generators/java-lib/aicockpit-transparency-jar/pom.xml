@@ -22,7 +22,7 @@
         <repository>
           <id>github</id>
           <name>GitHub Packages</name>
-          <url>https://maven.pkg.github.com/ki-cockpit/ai-cockpit-api</url>
+          <url>https://maven.pkg.github.com/KI-Cockpit/ai-cockpit-api</url>
         </repository>
     </distributionManagement>    
 
