@@ -25,32 +25,32 @@ jobs:
 
         - name: Generate and build libs
           run: |
-            cd api/transparency/generators/java-lib
+            cd ${{ github.workspace }}/api/transparency/generators/java-lib
             mvn clean -B package --file pom.xml
-            cd aicockpit-transparency-jar
+            cd target/generated-sources/openapi
             mvn package
-            cd api/decision/generators/java-lib
+            cd ${{ github.workspace }}/api/decision/generators/java-lib
             mvn clean -B package --file pom.xml
-            cd aicockpit-decision-jar
+            cd target/generated-sources/openapi
             mvn package
           env:
             CI: false
         
         - name: Generate client/server code
           run:
-            cd $REPO_BASE/api/decision/generators/java-client
+            cd ${{ github.workspace }}/api/decision/generators/java-client
             mvn package
-            cd $REPO_BASE/api/decision/generators/java-client/target/generated-sources/openapi
+            cd ${{ github.workspace }}/api/decision/generators/java-client/target/generated-sources/openapi
             mvn package
-            cd $REPO_BASE/api/decision/generators/java-server
+            cd ${{ github.workspace }}/api/decision/generators/java-server
             mvn package
-            cd $REPO_BASE/api/decision/generators/java-server/target/generated-sources/openapi
+            cd ${{ github.workspace }}/api/decision/generators/java-server/target/generated-sources/openapi
             mvn package    
-            cd $REPO_BASE/api/transparency/generators/java-client
+            cd ${{ github.workspace }}/api/transparency/generators/java-client
             mvn package    
-            cd $REPO_BASE/api/transparency/generators/java-client/target/generated-sources/openapi
+            cd ${{ github.workspace }}/api/transparency/generators/java-client/target/generated-sources/openapi
             mvn package
-            cd $REPO_BASE/api/transparency/generators/java-server
+            cd ${{ github.workspace }}/api/transparency/generators/java-server
             mvn package
-            cd $REPO_BASE/api/transparency/generators/java-server/target/generated-sources/openapi
+            cd ${{ github.workspace }}/api/transparency/generators/java-server/target/generated-sources/openapi
             mvn package            
