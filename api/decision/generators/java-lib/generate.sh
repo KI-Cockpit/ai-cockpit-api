@@ -21,7 +21,7 @@ function clean() {
 
 function generate {
     echo "generate code"
-    mvn clean package
+    mvn package
 
     echo "move generated code"
     # make sure target folder exists
