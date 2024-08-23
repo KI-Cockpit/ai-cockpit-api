@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: "generate code from openapi definition"
-    runs-on: [linux, X64]
+    runs-on: ubuntu-latest
 
     steps:
         - name: checkout
@@ -23,7 +23,7 @@ jobs:
           with:
             maven-version: 3.9.2
 
-        - name: Generate and build with Maven
+        - name: Generate and build libs
           run: |
             cd api/transparency/generators/java-lib
             mvn clean -B package --file pom.xml
@@ -35,3 +35,22 @@ jobs:
             mvn package
           env:
             CI: false
+        
+        - name: Generate client/server code
+          run:
+            cd $REPO_BASE/api/decision/generators/java-client
+            mvn package
+            cd $REPO_BASE/api/decision/generators/java-client/target/generated-sources/openapi
+            mvn package
+            cd $REPO_BASE/api/decision/generators/java-server
+            mvn package
+            cd $REPO_BASE/api/decision/generators/java-server/target/generated-sources/openapi
+            mvn package    
+            cd $REPO_BASE/api/transparency/generators/java-client
+            mvn package    
+            cd $REPO_BASE/api/transparency/generators/java-client/target/generated-sources/openapi
+            mvn package
+            cd $REPO_BASE/api/transparency/generators/java-server
+            mvn package
+            cd $REPO_BASE/api/transparency/generators/java-server/target/generated-sources/openapi
+            mvn package            
