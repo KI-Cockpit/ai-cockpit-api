@@ -37,7 +37,7 @@ jobs:
             CI: false
         
         - name: Generate client/server code
-          run:
+          run: |
             cd ${{ github.workspace }}/api/decision/generators/java-client
             mvn package
             cd ${{ github.workspace }}/api/decision/generators/java-client/target/generated-sources/openapi
