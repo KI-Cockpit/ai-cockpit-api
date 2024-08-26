@@ -7,6 +7,9 @@ jobs:
   build:
     name: "generate code from openapi definition"
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write    
 
     steps:
         - name: checkout
