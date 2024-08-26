@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.kicockpit</groupId>
+    <groupId>de.aicockpit</groupId>
     <artifactId>decisionapi</artifactId>
     <version>0.0.1</version>
     <description>Decision API</description>
@@ -37,8 +37,8 @@
                                 ../../ai-cockpit-decision.yml
                             </inputSpec>
                             <generatorName>java</generatorName>
-                            <apiPackage>de.starwit</apiPackage>
-                            <modelPackage>de.starwit.aicockpit</modelPackage>
+                            <apiPackage>de.aicockpit.decision</apiPackage>
+                            <modelPackage>de.aicockpit.decision.model</modelPackage>
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <generateApis>false</generateApis>
                             <generateModels>true</generateModels>
