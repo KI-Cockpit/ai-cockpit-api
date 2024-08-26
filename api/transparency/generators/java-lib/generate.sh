@@ -16,7 +16,8 @@ function clean() {
     mvn clean
 
     # kick out old generated code
-    rm -r aicockpit-transparency-jar/src/main/java
+    rm -r aicockpit-transparency-jar/src
+    rm -r aicockpit-transparency-jar/target
 }
 
 function generate {

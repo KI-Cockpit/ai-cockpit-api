@@ -166,6 +166,10 @@ components:
           $ref: '#/components/schemas/ModelType'
         modelVersion:
           type: string
+        sBOMLocation:
+          type: array
+          items:
+            type: string
     ModelType:
       type: string 
       enum:
