@@ -25,10 +25,10 @@ function generate {
 
     echo "move generated code"
     # make sure target folder exists
-    mkdir -p aicockpit-transparency-jar/src/main/java
-    cp -r -f target/generated-sources/openapi/src/main/java/de/starwit aicockpit-transparency-jar/src/main/java/de
-    cp target/generated-sources/openapi/src/main/java/de/JSON.java aicockpit-transparency-jar/src/main/java/de
-    cp target/generated-sources/openapi/src/main/java/de/ApiException.java aicockpit-transparency-jar/src/main/java/de
+    mkdir -p aicockpit-transparency-jar/src/main/java/de/aicockpit/transparency
+    cp -r -f target/generated-sources/openapi/src/main/java/de/aicockpit/transparency aicockpit-transparency-jar/src/main/java/de/aicockpit
+    cp target/generated-sources/openapi/src/main/java/de/aicockpit/JSON.java aicockpit-transparency-jar/src/main/java/de/aicockpit/
+    cp target/generated-sources/openapi/src/main/java/de/aicockpit/ApiException.java aicockpit-transparency-jar/src/main/java/de/aicockpit/
 }
 
 main $1

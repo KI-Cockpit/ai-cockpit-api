@@ -25,8 +25,8 @@ function generate {
 
     echo "move generated code"
     # make sure target folder exists
-    mkdir -p aicockpit-decision-jar/src/main/java
-    cp -r -f target/generated-sources/openapi/src/main/java/de/starwit aicockpit-decision-jar/src/main/java/de
+    mkdir -p aicockpit-decision-jar/src/main/java/decision/model
+    cp -r -f target/generated-sources/openapi/src/main/java/de/starwit/decision aicockpit-decision-jar/src/main/java/de/aicockpit
     cp target/generated-sources/openapi/src/main/java/de/JSON.java aicockpit-decision-jar/src/main/java/de
     cp target/generated-sources/openapi/src/main/java/de/ApiException.java aicockpit-decision-jar/src/main/java/de
 }
