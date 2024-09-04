@@ -5,7 +5,7 @@ info:
   description: |
     This API is part of project AI cockpit. 
 
-    For more details see: TODO
+    For more details see: https://www.kicockpit.eu/
 
 servers:
   - url: http://localhost:8080/v0
