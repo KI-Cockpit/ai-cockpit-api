@@ -24,6 +24,6 @@ Autonomy level configurable via database
 **Inherited classes decision and action**:
 
 * Examples for tasks
-* Might to be needed, but helps
+* Might be we will not need them, but they are helpful
   * to add special attributes for different checkpoints (e.g. timestamp)
   * to save different tasks (Aquisition, Analysis, Decision, Action) in different database tables.
