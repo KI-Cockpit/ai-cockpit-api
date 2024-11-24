@@ -70,3 +70,7 @@ Autonomy level configurable via database
 In fieldlab A, we are using only decisions and actions. So the question is, should we use a generic approach or a simpler one with concrete and known stages.
 
 ![Simplified model](./simplified-model.png)
+
+## Interface snippet
+
+[interface snippet](https://github.com/KI-Cockpit/ai-cockpit-api/blob/main/api/api-snippet.json)

@@ -87,7 +87,7 @@
           }
         }
       },
-      "/api/decisiontype/updateList": {
+      "/api/decisiontype/update-list": {
         "put": {
           "tags": [
             "decision-type-controller"
@@ -114,12 +114,12 @@
           }
         }
       },
-      "/api/trafficincident": {
+      "/api/decision": {
         "get": {
           "tags": [
             "decision-controller"
           ],
-          "summary": "Get all trafficincident",
+          "summary": "Get all decision",
           "operationId": "findAll_1",
           "responses": {
             "200": {
@@ -141,7 +141,7 @@
           "tags": [
             "decision-controller"
           ],
-          "summary": "Update trafficincident",
+          "summary": "Update decision",
           "operationId": "update_1",
           "requestBody": {
             "content": {
@@ -170,7 +170,7 @@
           "tags": [
             "decision-controller"
           ],
-          "summary": "Create trafficincident",
+          "summary": "Create decision",
           "operationId": "save_1",
           "requestBody": {
             "content": {
@@ -442,12 +442,12 @@
           }
         }
       },
-      "/api/trafficincident/{id}": {
+      "/api/decision/{id}": {
         "get": {
           "tags": [
             "decision-controller"
           ],
-          "summary": "Get trafficincident with id",
+          "summary": "Get decision with id",
           "operationId": "findById_2",
           "parameters": [
             {
@@ -477,7 +477,7 @@
           "tags": [
             "decision-controller"
           ],
-          "summary": "Delete trafficincident",
+          "summary": "Delete decision",
           "operationId": "delete_1",
           "parameters": [
             {
@@ -558,7 +558,7 @@
             "action-type-controller"
           ],
           "summary": "Get actiontype by incident type",
-          "operationId": "findByTrafficIncidentType",
+          "operationId": "findBydecisionType",
           "parameters": [
             {
               "name": "id",
@@ -696,10 +696,10 @@
             "description": {
               "type": "string"
             },
-            "trafficIncident": {
+            "decision": {
               "$ref": "#/components/schemas/DecisionEntity"
             },
-            "mitigationActionType": {
+            "actionType": {
               "$ref": "#/components/schemas/ActionTypeEntity"
             }
           }
@@ -732,7 +732,7 @@
                 "$ref": "#/components/schemas/ActionEntity"
               }
             },
-            "trafficIncidentType": {
+            "decisionType": {
               "uniqueItems": true,
               "type": "array",
               "items": {
@@ -772,7 +772,7 @@
             "description": {
               "type": "string"
             },
-            "trafficIncidentType": {
+            "decisionType": {
               "$ref": "#/components/schemas/DecisionTypeEntity"
             },
             "mitigationAction": {
@@ -797,14 +797,14 @@
             "description": {
               "type": "string"
             },
-            "trafficIncident": {
+            "decision": {
               "uniqueItems": true,
               "type": "array",
               "items": {
                 "$ref": "#/components/schemas/DecisionEntity"
               }
             },
-            "mitigationActionType": {
+            "actionType": {
               "uniqueItems": true,
               "type": "array",
               "items": {
