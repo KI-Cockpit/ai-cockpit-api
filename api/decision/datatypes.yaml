@@ -1,4 +1,3 @@
-
 components:
   schemas:
     Info:
@@ -16,41 +15,101 @@ components:
         usedModel:
           description: Models used in this application
           type: array
-          $ref: '#/components/schemas/DecisionModel'        
-    Decision:
+          $ref: '#/components/schemas/Model'
+    ActionEntity:
       type: object
       properties:
         id:
           type: integer
+          format: int64
+        creationTime:
+          type: string
+          format: date-time
         name:
           type: string
-        uuid:
+        description:
           type: string
-          format: uuid
-          description: Globally unique ID
-        autonomyLevel:
-          $ref: '#/components/schemas/AutonomyLevel'
-        followingDecisions:
+        decision:
+          $ref: "#/components/schemas/DecisionEntity"
+        actionType:
+          $ref: "#/components/schemas/ActionTypeEntity"
+    ActionTypeEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        executionPolicy:
+          type: string
+          enum:
+          - MANUAL
+          - WITHCHECK
+          - AUTOMATIC
+        action:
+          uniqueItems: true
           type: array
-          description: "Decisions that use output of this decisions. Can be null"
           items:
-            $ref: 'datatypes.yaml#/components/schemas/Decision'
-          example:
-            - id: 0
-              name: NextDecision
-              uuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-              autonomyLevel: autonomous
-            - id: 1
-              name: AnotherDecision
-              uuid: "3fa85f64-4417-4562-b3fc-2c963f66afa6"
-              autonomyLevel: proposalOnly
-    AutonomyLevel:
-      type: string 
-      enum:
-        - autonomous
-        - proposalOnly
-        - disabled
-    DecisionModel:
+            $ref: "#/components/schemas/ActionEntity"
+        decisionType:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionTypeEntity"
+    DecisionEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        acquisitionTime:
+          type: string
+          format: date-time
+        mediaUrl:
+          type: string
+        cameraLatitude:
+          type: number
+        cameraLongitude:
+          type: number
+        state:
+          type: string
+          enum:
+          - NEW
+          - ACCEPTED
+          - REJECTED
+        description:
+          type: string
+        decisionType:
+          $ref: "#/components/schemas/DecisionTypeEntity"
+        action:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/ActionEntity"
+    DecisionTypeEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        decision:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionEntity"
+        actionType:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/ActionTypeEntity"
+    Model:
       type: object
       properties:
         name:
