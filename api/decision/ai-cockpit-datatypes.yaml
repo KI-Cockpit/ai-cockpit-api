@@ -1,0 +1,95 @@
+components:
+  schemas:
+    ActionEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        creationTime:
+          type: string
+          format: date-time
+        name:
+          type: string
+        description:
+          type: string
+        decision:
+          $ref: "#/components/schemas/DecisionEntity"
+        actionType:
+          $ref: "#/components/schemas/ActionTypeEntity"
+    ActionTypeEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        executionPolicy:
+          type: string
+          enum:
+          - MANUAL
+          - WITHCHECK
+          - AUTOMATIC
+        action:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/ActionEntity"
+        decisionType:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionTypeEntity"
+    DecisionEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        acquisitionTime:
+          type: string
+          format: date-time
+        mediaUrl:
+          type: string
+        cameraLatitude:
+          type: number
+        cameraLongitude:
+          type: number
+        state:
+          type: string
+          enum:
+          - NEW
+          - ACCEPTED
+          - REJECTED
+        description:
+          type: string
+        decisionType:
+          $ref: "#/components/schemas/DecisionTypeEntity"
+        action:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/ActionEntity"
+    DecisionTypeEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        decision:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionEntity"
+        actionType:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/ActionTypeEntity"
