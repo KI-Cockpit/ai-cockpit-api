@@ -42,7 +42,7 @@
                                 <useSpringBoot3>true</useSpringBoot3>
                             </configOptions>
                             <inputSpec>
-                                ../../ai-cockpit-decision.yml
+                                ../../ai-cockpit-decision.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>de.starwit</apiPackage>
