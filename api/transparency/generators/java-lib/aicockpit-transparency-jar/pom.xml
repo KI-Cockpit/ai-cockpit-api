@@ -6,7 +6,7 @@
 
     <groupId>de.aicockpit</groupId>
     <artifactId>transparencyapi</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <description>Data model for AI cockpit transparency interface</description>
     <packaging>jar</packaging>
 
