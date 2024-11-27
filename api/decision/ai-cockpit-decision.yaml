@@ -1,0 +1,401 @@
+openapi: 3.0.1
+info:
+  title: AI Cockpit Decisions
+  version: '0.0.3'
+  description: |
+    This API is part of project AI cockpit. 
+
+    For more details see: TODO
+servers:
+- url: http://localhost:8081/v0
+
+paths:
+  /info:
+    get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
+      responses:
+        '200':
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'datatypes.yaml#/components/schemas/Info'
+  /api/decisiontype:
+    get:
+      summary: Get all decisiontype
+      operationId: findAll
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: 'datatypes.yaml#/components/schemas/DecisionTypeEntity'
+    put:
+      summary: Update decisiontype
+      operationId: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/DecisionTypeEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/DecisionTypeEntity'
+    post:
+      summary: Create decisiontype
+      operationId: save
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/DecisionTypeEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/DecisionTypeEntity'
+  /api/decisiontype/update-list:
+    put:
+      summary: Update a list of Decision Types
+      operationId: updateList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'datatypes.yaml#/components/schemas/DecisionTypeEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /api/decision:
+    get:
+      summary: Get all decision
+      operationId: findAll_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: 'datatypes.yaml#/components/schemas/DecisionEntity'
+    put:
+      summary: Update decision
+      operationId: update_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/DecisionEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/DecisionEntity'
+    post:
+      summary: Create decision
+      operationId: save_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/DecisionEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/DecisionEntity'
+  /api/actiontype:
+    get:
+      summary: Get all actiontype
+      operationId: findAll_2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+    put:
+      summary: Update actiontype
+      operationId: update_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+    post:
+      summary: Create actiontype
+      operationId: save_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+  /api/actiontype/update-list:
+    put:
+      summary: Update a list of actiontype
+      operationId: updateList_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /api/action:
+    get:
+      summary: Get all action
+      operationId: findAll_3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: 'datatypes.yaml#/components/schemas/ActionEntity'
+    put:
+      summary: Update action
+      operationId: update_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/ActionEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/ActionEntity'
+    post:
+      summary: Create action
+      operationId: save_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'datatypes.yaml#/components/schemas/ActionEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/ActionEntity'
+  /api/decisiontype/{id}:
+    get:
+      summary: Get decisiontype with id
+      operationId: findById_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/DecisionTypeEntity'
+    delete:
+      summary: Delete decisiontype
+      operationId: delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+  /api/decision/{id}:
+    get:
+      summary: Get decision with id
+      operationId: findById_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/DecisionEntity'
+    delete:
+      summary: Delete decision
+      operationId: delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+  /api/decision/download/{bucketName}/{objectName}:
+    get:
+      operationId: download
+      parameters:
+      - name: bucketName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: objectName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: string
+                format: byte
+  /api/actiontype/{id}:
+    get:
+      summary: Get actiontype with id
+      operationId: findById_3
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+    delete:
+      summary: Delete actiontype
+      operationId: delete_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+  /api/actiontype/by-decision-type/{id}:
+    get:
+      summary: Get actiontype by decision type
+      operationId: findByDecisionType
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: 'datatypes.yaml#/components/schemas/ActionTypeEntity'
+  /api/action/{id}:
+    get:
+      summary: Get action with id
+      operationId: findById_4
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'datatypes.yaml#/components/schemas/ActionEntity'
+    delete:
+      summary: Delete action
+      operationId: delete_3
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK

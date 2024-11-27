@@ -40,7 +40,7 @@
                             <configOptions>
                             </configOptions>
                             <inputSpec>
-                                ../../ai-cockpit-decision.yml
+                                ../../ai-cockpit-decision.yaml
                             </inputSpec>
                             <generatorName>java</generatorName>
                             <apiPackage>de.starwit</apiPackage>
