@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: AI Cockpit Decisions
-  version: '0.0.1'
+  version: '0.0.3'
   description: |
     This API is part of project AI cockpit. 
 

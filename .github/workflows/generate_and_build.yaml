@@ -35,14 +35,14 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-        # - name: Generate and build decision lib
-        #   run: |
-        #       cd ${{ github.workspace }}/api/decision/generators/java-lib
-        #       mvn clean -B package --file pom.xml
-        #       cd target/generated-sources/openapi
-        #       mvn --batch-mode deploy
-        #   env:
-        #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Generate and build decision lib
+          run: |
+              cd ${{ github.workspace }}/api/decision/generators/java-lib
+              mvn clean -B package --file pom.xml
+              cd target/generated-sources/openapi
+              mvn --batch-mode deploy
+          env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         - name: Generate client/server code
           run: |
