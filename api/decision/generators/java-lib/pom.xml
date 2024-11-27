@@ -34,7 +34,7 @@
                                 <useJakartaEe>true</useJakartaEe>
                             </configOptions>
                             <inputSpec>
-                                ../../ai-cockpit-decision.yml
+                                ../../ai-cockpit-decision.yaml
                             </inputSpec>
                             <generatorName>java</generatorName>
                             <apiPackage>de.aicockpit.decision</apiPackage>

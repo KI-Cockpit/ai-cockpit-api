@@ -38,8 +38,8 @@ jobs:
         - name: Generate and build decision lib
           run: |
               cd ${{ github.workspace }}/api/decision/generators/java-lib
-              mvn clean -B package --file pom.xml
-              cd target/generated-sources/openapi
+              ./generate.sh generate
+              cd aicockpit-decision-jar
               mvn --batch-mode deploy
           env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
