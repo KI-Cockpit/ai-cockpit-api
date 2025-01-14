@@ -1,22 +1,6 @@
 components:
   schemas:
-    Info:
-      type: object
-      properties:
-        generationDate:
-          description: Last date this interface was updated.
-          type: string
-          format: date-time
-        systemDescription:
-          description: additional info for this system
-          type: string
-        apiVersion:
-          type: string
-        usedModel:
-          description: Models used in this application
-          type: array
-          $ref: '#/components/schemas/Model'
-    ActionEntity:
+    Action:
       type: object
       properties:
         id:
@@ -30,45 +14,21 @@ components:
         description:
           type: string
         decision:
-          $ref: "#/components/schemas/DecisionEntity"
+          $ref: '#/components/schemas/Decision'
         actionType:
-          $ref: "#/components/schemas/ActionTypeEntity"
-    ActionTypeEntity:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        description:
-          type: string
-        executionPolicy:
-          type: string
-          enum:
-          - MANUAL
-          - WITHCHECK
-          - AUTOMATIC
-        action:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: "#/components/schemas/ActionEntity"
-        decisionType:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: "#/components/schemas/DecisionTypeEntity"
-    DecisionEntity:
+          $ref: 'configurationtypes.yaml#/components/schemas/ActionType'
+    Decision:
       type: object
       properties:
         id:
           type: integer
           format: int64
         acquisitionTime:
+          description: Timestamp when the decision was made
           type: string
           format: date-time
         mediaUrl:
+          description: Media the decision was based on
           type: string
         cameraLatitude:
           type: number
@@ -82,60 +42,12 @@ components:
           - REJECTED
         description:
           type: string
+        model:
+          $ref: 'configurationtypes.yaml#/components/schemas/Model'
         decisionType:
-          $ref: "#/components/schemas/DecisionTypeEntity"
-        action:
+          $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
+        actions:
           uniqueItems: true
           type: array
           items:
-            $ref: "#/components/schemas/ActionEntity"
-    DecisionTypeEntity:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        description:
-          type: string
-        decision:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: "#/components/schemas/DecisionEntity"
-        actionType:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: "#/components/schemas/ActionTypeEntity"
-    Model:
-      type: object
-      properties:
-        name:
-          type: string
-        version: 
-          type: string
-        lastDeployment:
-          type: string
-          format: date-time
-        modelType:
-          $ref: '#/components/schemas/ModelType'
-        modelLink:
-          description: Link to model documentation
-          type: string
-          format: uri
-        publicTrainingData:
-          description: Is model based on public training data?
-          type: boolean
-        linkToPublicTrainingData:
-          description: Link to public training data / documentation.
-          type: string
-          format: uri
-    ModelType:
-      type: string 
-      enum:
-        - LLM
-        - ComputerVision
-        - RuleBased
-        - Misc
+            $ref: '#/components/schemas/Action'

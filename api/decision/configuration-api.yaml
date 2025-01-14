@@ -1,0 +1,151 @@
+openapi: 3.0.1
+info:
+  title: AI Cockpit Decisions
+  version: '0.0.3'
+  description: |
+    This API is part of project AI cockpit. 
+
+    For more details see: TODO
+servers:
+- url: http://localhost:8081/v0
+
+paths:
+  /info:
+    get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
+      responses:
+        '200':
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'configurationtypes.yaml#/components/schemas/Info'
+  /api/decisiontype:
+    get:
+      summary: Get all decisiontype
+      operationId: getAllDecisionTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
+    put:
+      summary: Update decisiontype
+      operationId: updateDecisionType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
+    post:
+      summary: Create decisiontype
+      operationId: createDecisionType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
+  /api/actiontype:
+    get:
+      summary: Get all actiontype
+      operationId: getAllActionTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: 'configurationtypes.yaml#/components/schemas/ActionType'
+    put:
+      summary: Update actiontype
+      operationId: updateActionType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'configurationtypes.yaml#/components/schemas/ActionType'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/ActionType'
+    post:
+      summary: Create actiontype
+      operationId: createActionType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'configurationtypes.yaml#/components/schemas/ActionType'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/ActionType'
+  /api/decisiontype/{id}:
+    get:
+      summary: Get decisiontype by id
+      operationId: getDecisionTypesById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
+  /api/actiontype/{id}:
+    get:
+      summary: Get actiontype by id
+      operationId: getActionTypesById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/ActionType'

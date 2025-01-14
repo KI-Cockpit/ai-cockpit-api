@@ -1,0 +1,113 @@
+components:
+  schemas:
+    Info:
+      type: object
+      properties:
+        generationDate:
+          description: Last date this interface was updated.
+          type: string
+          format: date-time
+        systemDescription:
+          description: additional info for this system
+          type: string
+        apiVersion:
+          type: string
+        usedModel:
+          description: Models used in this application
+          type: array
+          $ref: '#/components/schemas/Model'
+    ActionType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        executionPolicy:
+          type: string
+          enum:
+          - MANUAL
+          - WITHCHECK
+          - AUTOMATIC
+        model:
+          $ref: '#/components/schemas/Model'      
+        actions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: 'datatypes.yaml#/components/schemas/Action'
+        decisionTypes:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DecisionType'
+    DecisionType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        model:
+          $ref: '#/components/schemas/Model'
+        decisions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: 'datatypes.yaml#/components/schemas/Decision'
+        actionTypes:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionType'
+    Model:
+      type: object
+      properties:
+        name:
+          type: string
+        version: 
+          type: string
+        lastDeployment:
+          type: string
+          format: date-time
+        modelType:
+          $ref: '#/components/schemas/ModelType'
+        modelLink:
+          description: Link to model documentation
+          type: string
+          format: uri
+        publicTrainingData:
+          description: Is model based on public training data?
+          type: boolean
+        linkToPublicTrainingData:
+          description: Link to public training data / documentation.
+          type: string
+          format: uri
+        decisions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: 'datatypes.yaml#/components/schemas/Decision'
+        actionTypes:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionType'
+        decisionTypes:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DecisionType'
+    ModelType:
+      type: string 
+      enum:
+        - LLM
+        - ComputerVision
+        - RuleBased
+        - Misc
