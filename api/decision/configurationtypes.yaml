@@ -10,7 +10,7 @@ components:
           type: string
         description:
           type: string
-        restUrl:
+        endpoint:
           type: string      
         executionPolicy:
           type: string
