@@ -5,12 +5,26 @@ info:
   description: |
     This API is part of project AI cockpit. 
 
-    For more details see: TODO
+    For more details see: https://www.kicockpit.eu/
+
 servers:
-- url: http://localhost:8081/v0
+- url: http://localhost:8081/api/v0
 
 paths:
-  /api/decision:
+  /info:
+    get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
+      responses:
+        '200':
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'configurationtypes.yaml#/components/schemas/Info'
+  /decision:
     get:
       summary: Get all decisions
       operationId: getAllDecisions
@@ -22,7 +36,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'datatypes.yaml#/components/schemas/Decision'
+                  $ref: 'configurationtypes.yaml#/components/schemas/Decision'
     post:
       summary: Create decision
       operationId: createDecision
@@ -30,7 +44,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: 'datatypes.yaml#/components/schemas/Decision'
+              $ref: 'configurationtypes.yaml#/components/schemas/Decision'
         required: true
       responses:
         '200':
@@ -38,8 +52,8 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: 'datatypes.yaml#/components/schemas/Decision'
-  /api/action:
+                $ref: 'configurationtypes.yaml#/components/schemas/Decision'
+  /action:
     get:
       summary: Get all actions
       operationId: getAllActions
@@ -51,7 +65,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'datatypes.yaml#/components/schemas/Action'
+                  $ref: 'configurationtypes.yaml#/components/schemas/Action'
     post:
       summary: Create action
       operationId: save_3
@@ -59,7 +73,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: 'datatypes.yaml#/components/schemas/Action'
+              $ref: 'configurationtypes.yaml#/components/schemas/Action'
         required: true
       responses:
         '200':
@@ -67,8 +81,8 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: 'datatypes.yaml#/components/schemas/Action'
-  /api/decision/{id}:
+                $ref: 'configurationtypes.yaml#/components/schemas/Action'
+  /decision/{id}:
     get:
       summary: Get decisions by id
       operationId: getDecisionsById
@@ -85,8 +99,8 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: 'datatypes.yaml#/components/schemas/Decision'
-  /api/action/{id}:
+                $ref: 'configurationtypes.yaml#/components/schemas/Decision'
+  /action/{id}:
     get:
       summary: Get action by id
       operationId: getActionsById
@@ -103,4 +117,4 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: 'datatypes.yaml#/components/schemas/Action'
+                $ref: 'configurationtypes.yaml#/components/schemas/Action'
