@@ -26,39 +26,11 @@ jobs:
           with:
             maven-version: 3.9.2
 
-        - name: Generate and build transparency lib
+        - name: Generate and build java model lib
           run: |
-            cd ${{ github.workspace }}/api/transparency/generators/java-lib
+            cd ${{ github.workspace }}/aicockpit-api/class_libs/java
             ./generate.sh generate
-            cd aicockpit-transparency-jar
+            cd aicockpit-api
             mvn --batch-mode deploy
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        - name: Generate and build decision lib
-          run: |
-              cd ${{ github.workspace }}/api/decision/generators/java-lib
-              ./generate.sh generate
-              cd aicockpit-decision-jar
-              mvn --batch-mode deploy
-          env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-        - name: Generate client/server code
-          run: |
-            cd ${{ github.workspace }}/api/decision/generators/java-client
-            mvn package
-            cd ${{ github.workspace }}/api/decision/generators/java-client/target/generated-sources/openapi
-            mvn package
-            cd ${{ github.workspace }}/api/decision/generators/java-server
-            mvn package
-            cd ${{ github.workspace }}/api/decision/generators/java-server/target/generated-sources/openapi
-            mvn package    
-            cd ${{ github.workspace }}/api/transparency/generators/java-client
-            mvn package    
-            cd ${{ github.workspace }}/api/transparency/generators/java-client/target/generated-sources/openapi
-            mvn package
-            cd ${{ github.workspace }}/api/transparency/generators/java-server
-            mvn package
-            cd ${{ github.workspace }}/api/transparency/generators/java-server/target/generated-sources/openapi
-            mvn package
