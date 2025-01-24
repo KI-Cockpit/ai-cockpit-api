@@ -1,8 +1,8 @@
 # API Definition & Code Generation
 
-[datatypes](configurationtypes.yaml)
-[decision api](decision-api.yaml)
-[transparency api](transparency-api.yml)
+* [datatypes](configurationtypes.yaml)
+* [decision api](decision-api.yaml)
+* [transparency api](transparency-api.yml)
 
 ## Generated Code
 
