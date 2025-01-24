@@ -10,6 +10,19 @@ servers:
 - url: http://localhost:8081/v0
 
 paths:
+  /info:
+    get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
+      responses:
+        '200':
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'configurationtypes.yaml#/components/schemas/Info'
   /api/decision:
     get:
       summary: Get all decisions
