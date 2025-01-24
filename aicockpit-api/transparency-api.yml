@@ -1,0 +1,94 @@
+openapi: '3.0.2'
+info:
+  title: AI Cockpit Transparency
+  version: '0.0.3'
+  description: |
+    This API is part of project AI cockpit. 
+
+    For more details see: https://www.kicockpit.eu/
+
+servers:
+  - url: http://localhost:8080/api/v0
+
+paths:
+  /info:
+    get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
+      responses:
+        '200':
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'configurationtypes.yaml#/components/schemas/Info'
+  /modules:
+    get:
+      description: delivers a list of components/modules of which AI system is composed 
+      operationId: getModules
+      responses:
+        '200':
+          description: module list
+          content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: 'configurationtypes.yaml#/components/schemas/Module'
+  /modules/{id}:
+    get:
+      description: delivers components/modules with provided id
+      operationId: getModule
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of module        
+      responses:
+        '200':
+          description: get single module
+          content:
+              application/json:
+                schema:
+                  type: object
+                  items:
+                    $ref: 'configurationtypes.yaml#/components/schemas/Module'
+  /modules/register:
+    post:
+        description: register a new module
+        operationId: registerModule
+        requestBody:
+          description: Module test to be registered
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/Module'
+        responses:
+          '200':
+            description: created a new module     
+  /modules/register/{id}:    
+    put:
+        description: update a module
+        operationId: updateModule
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: true
+            description: Numeric ID of module test to be updated        
+        requestBody:
+          description: Module test to be updated
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: 'configurationtypes.yaml#/components/schemas/Module'
+        responses:
+          '200':
+            description: updated a module  
