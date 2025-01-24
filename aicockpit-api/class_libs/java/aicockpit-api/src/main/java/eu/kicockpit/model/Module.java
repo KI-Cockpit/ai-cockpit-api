@@ -56,7 +56,7 @@ import eu.kicockpit.JSON;
 /**
  * Module
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-24T17:00:16.566867707+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-24T22:58:10.130434554+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
 public class Module {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

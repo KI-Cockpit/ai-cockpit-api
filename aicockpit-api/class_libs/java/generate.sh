@@ -25,8 +25,8 @@ function generate {
 
     echo "move generated code"
     # make sure target folder exists
-    mkdir -p aicockpit-api/src/main/java/eu/kicockpit/model
-    cp -r -f target/generated-sources/openapi/src/main/java/eu/kicockpit/model aicockpit-api/src/main/java/eu/kicockpit/model
+    mkdir -p aicockpit-api/src/main/java/eu/kicockpit
+    cp -r -f target/generated-sources/openapi/src/main/java/eu/kicockpit/model aicockpit-api/src/main/java/eu/kicockpit
     cp target/generated-sources/openapi/src/main/java/eu/kicockpit/JSON.java aicockpit-api/src/main/java/eu/kicockpit
     cp target/generated-sources/openapi/src/main/java/eu/kicockpit/ApiException.java aicockpit-api/src/main/java/eu/kicockpit
 }
