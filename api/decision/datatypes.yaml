@@ -17,6 +17,8 @@ components:
           $ref: '#/components/schemas/Decision'
         actionType:
           $ref: 'configurationtypes.yaml#/components/schemas/ActionType'
+        metadata:
+          type: string
     Decision:
       type: object
       properties:
@@ -30,6 +32,9 @@ components:
         mediaUrl:
           description: Media the decision was based on
           type: string
+        actionVisualizationUrl:
+          description: Media the decision was based on
+          type: string        
         cameraLatitude:
           type: number
         cameraLongitude:
@@ -42,8 +47,8 @@ components:
           - REJECTED
         description:
           type: string
-        model:
-          $ref: 'configurationtypes.yaml#/components/schemas/Model'
+        module:
+          $ref: 'configurationtypes.yaml#/components/schemas/Module'
         decisionType:
           $ref: 'configurationtypes.yaml#/components/schemas/DecisionType'
         actions:
