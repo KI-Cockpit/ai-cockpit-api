@@ -1,0 +1,25 @@
+openapi: 3.0.1
+info:
+  title: AI Cockpit Decisions
+  version: '0.0.3'
+  description: |
+    This API is part of project AI cockpit. 
+
+    For more details see: TODO
+servers:
+- url: http://localhost:8081/v0
+
+paths:
+  /info:
+    get:
+      description: shall deliver info on interface version and hosting system, readonly
+      operationId: getInfo
+      responses:
+        '200':
+          description: base info 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'configurationtypes.yaml#/components/schemas/Info'
