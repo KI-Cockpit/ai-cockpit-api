@@ -98,6 +98,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Decision.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.DecisionType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Info.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Model.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Module.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();
     }

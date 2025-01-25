@@ -20,9 +20,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import eu.kicockpit.model.ActionType;
-import eu.kicockpit.model.Decision;
 import eu.kicockpit.model.DecisionType;
-import eu.kicockpit.model.ModelType;
+import eu.kicockpit.model.Model;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -56,7 +55,7 @@ import eu.kicockpit.JSON;
 /**
  * Module
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-24T22:58:10.130434554+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-25T12:18:25.243141798+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
 public class Module {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -78,15 +77,10 @@ public class Module {
   @jakarta.annotation.Nullable
   private Boolean useAI;
 
-  public static final String SERIALIZED_NAME_MODEL_TYPE = "modelType";
-  @SerializedName(SERIALIZED_NAME_MODEL_TYPE)
+  public static final String SERIALIZED_NAME_MODEL = "model";
+  @SerializedName(SERIALIZED_NAME_MODEL)
   @jakarta.annotation.Nullable
-  private ModelType modelType;
-
-  public static final String SERIALIZED_NAME_DECISIONS = "decisions";
-  @SerializedName(SERIALIZED_NAME_DECISIONS)
-  @jakarta.annotation.Nullable
-  private Set<Decision> decisions = new LinkedHashSet<>();
+  private Model model;
 
   public static final String SERIALIZED_NAME_ACTION_TYPES = "actionTypes";
   @SerializedName(SERIALIZED_NAME_ACTION_TYPES)
@@ -187,49 +181,22 @@ public class Module {
   }
 
 
-  public Module modelType(@jakarta.annotation.Nullable ModelType modelType) {
-    this.modelType = modelType;
+  public Module model(@jakarta.annotation.Nullable Model model) {
+    this.model = model;
     return this;
   }
 
   /**
-   * Get modelType
-   * @return modelType
+   * Get model
+   * @return model
    */
   @jakarta.annotation.Nullable
-  public ModelType getModelType() {
-    return modelType;
+  public Model getModel() {
+    return model;
   }
 
-  public void setModelType(@jakarta.annotation.Nullable ModelType modelType) {
-    this.modelType = modelType;
-  }
-
-
-  public Module decisions(@jakarta.annotation.Nullable Set<Decision> decisions) {
-    this.decisions = decisions;
-    return this;
-  }
-
-  public Module addDecisionsItem(Decision decisionsItem) {
-    if (this.decisions == null) {
-      this.decisions = new LinkedHashSet<>();
-    }
-    this.decisions.add(decisionsItem);
-    return this;
-  }
-
-  /**
-   * Get decisions
-   * @return decisions
-   */
-  @jakarta.annotation.Nullable
-  public Set<Decision> getDecisions() {
-    return decisions;
-  }
-
-  public void setDecisions(@jakarta.annotation.Nullable Set<Decision> decisions) {
-    this.decisions = decisions;
+  public void setModel(@jakarta.annotation.Nullable Model model) {
+    this.model = model;
   }
 
 
@@ -355,8 +322,7 @@ public class Module {
         Objects.equals(this.name, module.name) &&
         Objects.equals(this.description, module.description) &&
         Objects.equals(this.useAI, module.useAI) &&
-        Objects.equals(this.modelType, module.modelType) &&
-        Objects.equals(this.decisions, module.decisions) &&
+        Objects.equals(this.model, module.model) &&
         Objects.equals(this.actionTypes, module.actionTypes) &&
         Objects.equals(this.decisionTypes, module.decisionTypes) &&
         Objects.equals(this.sBOMLocation, module.sBOMLocation) &&
@@ -365,7 +331,7 @@ public class Module {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description, useAI, modelType, decisions, actionTypes, decisionTypes, sBOMLocation, successors);
+    return Objects.hash(id, name, description, useAI, model, actionTypes, decisionTypes, sBOMLocation, successors);
   }
 
   @Override
@@ -376,8 +342,7 @@ public class Module {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    useAI: ").append(toIndentedString(useAI)).append("\n");
-    sb.append("    modelType: ").append(toIndentedString(modelType)).append("\n");
-    sb.append("    decisions: ").append(toIndentedString(decisions)).append("\n");
+    sb.append("    model: ").append(toIndentedString(model)).append("\n");
     sb.append("    actionTypes: ").append(toIndentedString(actionTypes)).append("\n");
     sb.append("    decisionTypes: ").append(toIndentedString(decisionTypes)).append("\n");
     sb.append("    sBOMLocation: ").append(toIndentedString(sBOMLocation)).append("\n");
@@ -408,8 +373,7 @@ public class Module {
     openapiFields.add("name");
     openapiFields.add("description");
     openapiFields.add("useAI");
-    openapiFields.add("modelType");
-    openapiFields.add("decisions");
+    openapiFields.add("model");
     openapiFields.add("actionTypes");
     openapiFields.add("decisionTypes");
     openapiFields.add("sBOMLocation");
@@ -446,23 +410,9 @@ public class Module {
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
-      // validate the optional field `modelType`
-      if (jsonObj.get("modelType") != null && !jsonObj.get("modelType").isJsonNull()) {
-        ModelType.validateJsonElement(jsonObj.get("modelType"));
-      }
-      if (jsonObj.get("decisions") != null && !jsonObj.get("decisions").isJsonNull()) {
-        JsonArray jsonArraydecisions = jsonObj.getAsJsonArray("decisions");
-        if (jsonArraydecisions != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("decisions").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `decisions` to be an array in the JSON string but got `%s`", jsonObj.get("decisions").toString()));
-          }
-
-          // validate the optional field `decisions` (array)
-          for (int i = 0; i < jsonArraydecisions.size(); i++) {
-            Decision.validateJsonElement(jsonArraydecisions.get(i));
-          };
-        }
+      // validate the optional field `model`
+      if (jsonObj.get("model") != null && !jsonObj.get("model").isJsonNull()) {
+        Model.validateJsonElement(jsonObj.get("model"));
       }
       if (jsonObj.get("actionTypes") != null && !jsonObj.get("actionTypes").isJsonNull()) {
         JsonArray jsonArrayactionTypes = jsonObj.getAsJsonArray("actionTypes");

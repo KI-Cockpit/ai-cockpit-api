@@ -130,14 +130,9 @@ components:
           type: string
         useAI:
           type: boolean
-        modelType:
+        model:
           description: "If module uses AI this holds info about model used by module"
-          $ref: '#/components/schemas/ModelType'          
-        decisions:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Decision'
+          $ref: '#/components/schemas/Model'
         actionTypes:
           uniqueItems: true
           type: array
