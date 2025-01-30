@@ -146,7 +146,7 @@ components:
         sBOMLocation:
           type: object
           additionalProperties:
-            type: string
+            type: object
             properties:    
               url:
                 type: string
