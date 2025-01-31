@@ -19,9 +19,10 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import eu.kicockpit.model.AIModel;
 import eu.kicockpit.model.ActionType;
 import eu.kicockpit.model.DecisionType;
-import eu.kicockpit.model.Model;
+import eu.kicockpit.model.ModuleSBOMLocationValue;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,7 +56,7 @@ import eu.kicockpit.JSON;
 /**
  * Module
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-25T12:18:25.243141798+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T20:33:34.686087667+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
 public class Module {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -80,7 +81,7 @@ public class Module {
   public static final String SERIALIZED_NAME_MODEL = "model";
   @SerializedName(SERIALIZED_NAME_MODEL)
   @jakarta.annotation.Nullable
-  private Model model;
+  private AIModel model;
 
   public static final String SERIALIZED_NAME_ACTION_TYPES = "actionTypes";
   @SerializedName(SERIALIZED_NAME_ACTION_TYPES)
@@ -95,12 +96,17 @@ public class Module {
   public static final String SERIALIZED_NAME_S_B_O_M_LOCATION = "sBOMLocation";
   @SerializedName(SERIALIZED_NAME_S_B_O_M_LOCATION)
   @jakarta.annotation.Nullable
-  private Map<String, String> sBOMLocation = new HashMap<>();
+  private Map<String, ModuleSBOMLocationValue> sBOMLocation = new HashMap<>();
 
   public static final String SERIALIZED_NAME_SUCCESSORS = "successors";
   @SerializedName(SERIALIZED_NAME_SUCCESSORS)
   @jakarta.annotation.Nullable
   private Set<Module> successors = new LinkedHashSet<>();
+
+  public static final String SERIALIZED_NAME_SUBMODULES = "submodules";
+  @SerializedName(SERIALIZED_NAME_SUBMODULES)
+  @jakarta.annotation.Nullable
+  private Set<Module> submodules = new LinkedHashSet<>();
 
   public Module() {
   }
@@ -181,7 +187,7 @@ public class Module {
   }
 
 
-  public Module model(@jakarta.annotation.Nullable Model model) {
+  public Module model(@jakarta.annotation.Nullable AIModel model) {
     this.model = model;
     return this;
   }
@@ -191,11 +197,11 @@ public class Module {
    * @return model
    */
   @jakarta.annotation.Nullable
-  public Model getModel() {
+  public AIModel getModel() {
     return model;
   }
 
-  public void setModel(@jakarta.annotation.Nullable Model model) {
+  public void setModel(@jakarta.annotation.Nullable AIModel model) {
     this.model = model;
   }
 
@@ -254,12 +260,12 @@ public class Module {
   }
 
 
-  public Module sBOMLocation(@jakarta.annotation.Nullable Map<String, String> sBOMLocation) {
+  public Module sBOMLocation(@jakarta.annotation.Nullable Map<String, ModuleSBOMLocationValue> sBOMLocation) {
     this.sBOMLocation = sBOMLocation;
     return this;
   }
 
-  public Module putSBOMLocationItem(String key, String sBOMLocationItem) {
+  public Module putSBOMLocationItem(String key, ModuleSBOMLocationValue sBOMLocationItem) {
     if (this.sBOMLocation == null) {
       this.sBOMLocation = new HashMap<>();
     }
@@ -272,11 +278,11 @@ public class Module {
    * @return sBOMLocation
    */
   @jakarta.annotation.Nullable
-  public Map<String, String> getsBOMLocation() {
+  public Map<String, ModuleSBOMLocationValue> getsBOMLocation() {
     return sBOMLocation;
   }
 
-  public void setsBOMLocation(@jakarta.annotation.Nullable Map<String, String> sBOMLocation) {
+  public void setsBOMLocation(@jakarta.annotation.Nullable Map<String, ModuleSBOMLocationValue> sBOMLocation) {
     this.sBOMLocation = sBOMLocation;
   }
 
@@ -308,6 +314,33 @@ public class Module {
   }
 
 
+  public Module submodules(@jakarta.annotation.Nullable Set<Module> submodules) {
+    this.submodules = submodules;
+    return this;
+  }
+
+  public Module addSubmodulesItem(Module submodulesItem) {
+    if (this.submodules == null) {
+      this.submodules = new LinkedHashSet<>();
+    }
+    this.submodules.add(submodulesItem);
+    return this;
+  }
+
+  /**
+   * Get submodules
+   * @return submodules
+   */
+  @jakarta.annotation.Nullable
+  public Set<Module> getSubmodules() {
+    return submodules;
+  }
+
+  public void setSubmodules(@jakarta.annotation.Nullable Set<Module> submodules) {
+    this.submodules = submodules;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -326,12 +359,13 @@ public class Module {
         Objects.equals(this.actionTypes, module.actionTypes) &&
         Objects.equals(this.decisionTypes, module.decisionTypes) &&
         Objects.equals(this.sBOMLocation, module.sBOMLocation) &&
-        Objects.equals(this.successors, module.successors);
+        Objects.equals(this.successors, module.successors) &&
+        Objects.equals(this.submodules, module.submodules);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description, useAI, model, actionTypes, decisionTypes, sBOMLocation, successors);
+    return Objects.hash(id, name, description, useAI, model, actionTypes, decisionTypes, sBOMLocation, successors, submodules);
   }
 
   @Override
@@ -347,6 +381,7 @@ public class Module {
     sb.append("    decisionTypes: ").append(toIndentedString(decisionTypes)).append("\n");
     sb.append("    sBOMLocation: ").append(toIndentedString(sBOMLocation)).append("\n");
     sb.append("    successors: ").append(toIndentedString(successors)).append("\n");
+    sb.append("    submodules: ").append(toIndentedString(submodules)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -378,6 +413,7 @@ public class Module {
     openapiFields.add("decisionTypes");
     openapiFields.add("sBOMLocation");
     openapiFields.add("successors");
+    openapiFields.add("submodules");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -412,7 +448,7 @@ public class Module {
       }
       // validate the optional field `model`
       if (jsonObj.get("model") != null && !jsonObj.get("model").isJsonNull()) {
-        Model.validateJsonElement(jsonObj.get("model"));
+        AIModel.validateJsonElement(jsonObj.get("model"));
       }
       if (jsonObj.get("actionTypes") != null && !jsonObj.get("actionTypes").isJsonNull()) {
         JsonArray jsonArrayactionTypes = jsonObj.getAsJsonArray("actionTypes");
@@ -453,6 +489,20 @@ public class Module {
           // validate the optional field `successors` (array)
           for (int i = 0; i < jsonArraysuccessors.size(); i++) {
             Module.validateJsonElement(jsonArraysuccessors.get(i));
+          };
+        }
+      }
+      if (jsonObj.get("submodules") != null && !jsonObj.get("submodules").isJsonNull()) {
+        JsonArray jsonArraysubmodules = jsonObj.getAsJsonArray("submodules");
+        if (jsonArraysubmodules != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("submodules").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `submodules` to be an array in the JSON string but got `%s`", jsonObj.get("submodules").toString()));
+          }
+
+          // validate the optional field `submodules` (array)
+          for (int i = 0; i < jsonArraysubmodules.size(); i++) {
+            Module.validateJsonElement(jsonArraysubmodules.get(i));
           };
         }
       }

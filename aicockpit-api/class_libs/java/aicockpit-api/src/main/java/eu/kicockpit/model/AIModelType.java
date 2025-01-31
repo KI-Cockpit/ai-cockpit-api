@@ -24,10 +24,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
- * Gets or Sets ModelType
+ * Gets or Sets AIModelType
  */
-@JsonAdapter(ModelType.Adapter.class)
-public enum ModelType {
+@JsonAdapter(AIModelType.Adapter.class)
+public enum AIModelType {
   
   LLM("LLM"),
   
@@ -39,7 +39,7 @@ public enum ModelType {
 
   private String value;
 
-  ModelType(String value) {
+  AIModelType(String value) {
     this.value = value;
   }
 
@@ -52,8 +52,8 @@ public enum ModelType {
     return String.valueOf(value);
   }
 
-  public static ModelType fromValue(String value) {
-    for (ModelType b : ModelType.values()) {
+  public static AIModelType fromValue(String value) {
+    for (AIModelType b : AIModelType.values()) {
       if (b.value.equals(value)) {
         return b;
       }
@@ -61,22 +61,22 @@ public enum ModelType {
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 
-  public static class Adapter extends TypeAdapter<ModelType> {
+  public static class Adapter extends TypeAdapter<AIModelType> {
     @Override
-    public void write(final JsonWriter jsonWriter, final ModelType enumeration) throws IOException {
+    public void write(final JsonWriter jsonWriter, final AIModelType enumeration) throws IOException {
       jsonWriter.value(enumeration.getValue());
     }
 
     @Override
-    public ModelType read(final JsonReader jsonReader) throws IOException {
+    public AIModelType read(final JsonReader jsonReader) throws IOException {
       String value = jsonReader.nextString();
-      return ModelType.fromValue(value);
+      return AIModelType.fromValue(value);
     }
   }
 
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
     String value = jsonElement.getAsString();
-    ModelType.fromValue(value);
+    AIModelType.fromValue(value);
   }
 }
 

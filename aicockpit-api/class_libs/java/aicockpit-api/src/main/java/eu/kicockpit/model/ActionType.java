@@ -51,9 +51,9 @@ import java.util.Set;
 import eu.kicockpit.JSON;
 
 /**
- * ActionType
+ * A type of action that a system can execute
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-25T12:18:25.243141798+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T20:33:34.686087667+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
 public class ActionType {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

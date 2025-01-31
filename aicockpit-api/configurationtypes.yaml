@@ -10,7 +10,8 @@ components:
           type: string
         apiVersion:
           type: string  
-    ActionType: # A type of action that a system can execute
+    ActionType: 
+      description: "A type of action that a system can execute"
       type: object
       properties:
         id:
@@ -40,7 +41,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DecisionType'
-    Action: # An actual action that a system executes
+    Action: 
+      description: "An actual action that a system executes"
       type: object
       properties:
         id:
@@ -59,7 +61,8 @@ components:
           $ref: '#/components/schemas/ActionType'
         metadata:
           type: string            
-    DecisionType: # A type of decision that a system can derive
+    DecisionType: 
+      description: "A type of decision that a system can derive"
       type: object
       properties:
         id:
@@ -81,7 +84,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ActionType'
-    Decision: # An actual decision that a system made
+    Decision: 
+      description: "An actual decision that a system made"
       type: object
       properties:
         id:
@@ -132,7 +136,7 @@ components:
           type: boolean
         model:
           description: "If module uses AI this holds info about model used by module"
-          $ref: '#/components/schemas/Model'
+          $ref: '#/components/schemas/AIModel'
         actionTypes:
           uniqueItems: true
           type: array
@@ -155,7 +159,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Module'
-    Model:
+        submodules:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
+    AIModel:
       type: object
       properties:
         name:
@@ -166,7 +175,7 @@ components:
           type: string
           format: date-time
         modelType:
-          $ref: '#/components/schemas/ModelType'
+          $ref: '#/components/schemas/AIModelType'
         modelLink:
           description: Link to model documentation
           type: string
@@ -178,7 +187,7 @@ components:
           description: Link to public training data / documentation.
           type: string
           format: uri
-    ModelType:
+    AIModelType:
       type: string 
       enum:
         - LLM

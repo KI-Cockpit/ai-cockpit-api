@@ -49,9 +49,9 @@ import java.util.Set;
 import eu.kicockpit.JSON;
 
 /**
- * Action
+ * An actual action that a system executes
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-25T12:18:25.243141798+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-31T20:33:34.686087667+01:00[Europe/Berlin]", comments = "Generator version: 7.11.0")
 public class Action {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

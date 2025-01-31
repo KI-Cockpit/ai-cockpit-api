@@ -93,13 +93,14 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter);
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
+        gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.AIModel.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Action.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.ActionType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Decision.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.DecisionType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Info.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Model.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.Module.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new eu.kicockpit.model.ModuleSBOMLocationValue.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();
     }
 
