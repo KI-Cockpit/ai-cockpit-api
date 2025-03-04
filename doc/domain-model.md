@@ -73,4 +73,4 @@ In fieldlab A, we are using only decisions and actions. So the question is, shou
 
 ## Interface snippet
 
-[interface snippet](https://github.com/KI-Cockpit/ai-cockpit-api/blob/main/api/api-snippet.json)
+[interface snippet data types](https://github.com/KI-Cockpit/ai-cockpit-api/blob/main/configurationtypes.yaml)
