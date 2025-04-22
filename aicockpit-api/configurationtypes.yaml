@@ -139,11 +139,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Module'
-        submodules:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Module'
     AIModel:
       type: object
       properties:
