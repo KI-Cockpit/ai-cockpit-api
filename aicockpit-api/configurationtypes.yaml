@@ -28,19 +28,7 @@ components:
           enum:
           - MANUAL
           - WITHCHECK
-          - AUTOMATIC
-        module:
-          $ref: '#/components/schemas/Module'      
-        actions:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Action'
-        decisionTypes:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/DecisionType'
+          - AUTOMATIC  
     Action: 
       description: "An actual action that a system executes"
       type: object
@@ -55,8 +43,6 @@ components:
           type: string
         description:
           type: string
-        decision:
-          $ref: '#/components/schemas/Decision'
         actionType:
           $ref: '#/components/schemas/ActionType'
         metadata:
@@ -74,16 +60,6 @@ components:
           type: string
         module:
           $ref: '#/components/schemas/Module'
-        decisions:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Decision'
-        actionTypes:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ActionType'
     Decision: 
       description: "An actual decision that a system made"
       type: object
@@ -128,6 +104,8 @@ components:
         id:
           type: integer
           format: int64      
+        version:
+          type: string
         name:
           type: string
         description:
