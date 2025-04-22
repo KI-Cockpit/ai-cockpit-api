@@ -108,6 +108,8 @@ components:
           type: string
         name:
           type: string
+        applicationIdentifier:
+          type: string
         description:
           type: string
         useAI:
