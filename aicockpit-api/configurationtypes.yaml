@@ -60,6 +60,11 @@ components:
           type: string
         description:
           type: string
+        actionTypes:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionType'
         module:
           $ref: '#/components/schemas/Module'
     Decision: 
