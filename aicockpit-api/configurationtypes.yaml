@@ -29,6 +29,8 @@ components:
           - MANUAL
           - WITHCHECK
           - AUTOMATIC  
+        module:
+          $ref: '#/components/schemas/Module'
     Action: 
       description: "An actual action that a system executes"
       type: object
