@@ -26,8 +26,7 @@ As a AI-Operator want to switch between different automation levels in order to 
 * automation levels and detailed description of the behavior can be shown
 * dependent tasks (not in scope): concrete behavior, interaction and automation has to be implemented for each autonomy level
 
-
-### Important Design Alignment
+### 3. Design Alignment
 
 We need a model of a non-trivial AI-output (e.g. classification) and a succeeding automation with more than one action:
 
@@ -39,13 +38,13 @@ The first idea is, to implement different stages which can have a different set 
 
 ![domain model autonomy](./generic-model.png)
 
-**Stage** (Modul):
+**Stage**:
 
 * In case it is a decision or action, it is a concrete event and needs to have a timestamp.
 
-**StageType** (or Classification?):
+**StageType**:
 
-* Something where we can define an autonomy level for. Stages with the same StageType has the same autonomy level (E.g. Unfall, Stau for Checkpoint decision).
+* Something where we can define an autonomy level for. Stages with the same StageType has the same autonomy level (E.g. accident, traffic jam for checkpoint action).
 
 **Level** (Autonomy Level):
 
@@ -71,6 +70,10 @@ In fieldlab A, we are using only decisions and actions. So the question is, shou
 
 ![Simplified model](./simplified-model.png)
 
+## Conclusion
+
+Implementing the simplified model seems to be enough and is easy to understand. Nevertheless, it not fulfills the need to add autonomy levels for acquisition and analysis. We decided to start with things we need and we don't have the use cases and requirements to add other stages in the fieldlabs right now. It is recommended to review and extend the interfaces if needed. We also defined autonomy levels in source code because we have to change level handling in the code anyway.
+
 ## Interface snippet
 
-[interface snippet data types](https://github.com/KI-Cockpit/ai-cockpit-api/blob/main/configurationtypes.yaml)
+[interface snippet data types](../aicockpit-api/configurationtypes.yaml)
