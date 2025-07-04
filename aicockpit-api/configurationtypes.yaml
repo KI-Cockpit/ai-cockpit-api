@@ -173,6 +173,6 @@ components:
       type: string 
       enum:
         - LLM
-        - ComputerVision
-        - RuleBased
+        - Computervision
+        - Rulebased
         - Misc
